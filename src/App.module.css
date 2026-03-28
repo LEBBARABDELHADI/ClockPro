@@ -1,0 +1,109 @@
+.app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--bg);
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.header {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba(79, 158, 255, 0.1);
+  background: rgba(10, 14, 26, 0.75);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoIcon {
+  font-size: 1.3rem;
+  filter: drop-shadow(0 0 8px rgba(79, 158, 255, 0.7));
+}
+
+.logoText {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, #4f9eff, #7c6aff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Layout ───────────────────────────────────────────────── */
+.layout {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  gap: 40px;
+  padding: 48px 40px 64px;
+  align-items: flex-start;
+  flex: 1;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+.footer {
+  padding: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  width: 100%;
+  justify-content: center;
+}
+
+.footerSep { opacity: 0.4; }
+
+/* ── Responsive ───────────────────────────────────────────── */
+
+/* Tablet */
+@media (max-width: 900px) {
+  .sidebar { display: none; }
+  .layout  { padding: 32px 24px 48px; gap: 0; }
+  .header  { padding: 18px 24px; justify-content: center; }
+}
+
+/* Phone */
+@media (max-width: 480px) {
+  .layout  { padding: 20px 12px 36px; }
+  .header  { padding: 14px 16px; gap: 10px; }
+  .logoText { font-size: 1rem; }
+}
+
+/* Small phone */
+@media (max-width: 380px) {
+  .layout  { padding: 16px 8px 28px; }
+  .header  { padding: 12px 12px; flex-direction: column; align-items: center; gap: 8px; }
+  .footer  { font-size: 0.68rem; padding: 14px; }
+}

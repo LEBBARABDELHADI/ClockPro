@@ -1,0 +1,33 @@
+.digit {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* outgoing — slides up + fades out */
+.out {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: slideOut 0.22s cubic-bezier(0.4, 0, 1, 1) forwards;
+  pointer-events: none;
+}
+
+/* incoming — slides in from below */
+.in {
+  animation: slideIn 0.26s cubic-bezier(0, 0, 0.2, 1) forwards;
+}
+
+@keyframes slideOut {
+  from { transform: translateY(0)    scale(1);    opacity: 1; }
+  to   { transform: translateY(-55%) scale(0.85); opacity: 0; }
+}
+
+@keyframes slideIn {
+  from { transform: translateY(55%)  scale(0.85); opacity: 0; }
+  to   { transform: translateY(0)    scale(1);    opacity: 1; }
+}

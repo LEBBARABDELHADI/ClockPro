@@ -1,0 +1,52 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --accent:       #4f9eff;
+  --accent-2:     #7c6aff;
+  --accent-grad:  linear-gradient(135deg, #4f9eff, #7c6aff);
+  --bg:           #0a0e1a;
+  --surface:      rgba(255, 255, 255, 0.03);
+  --border:       rgba(255, 255, 255, 0.08);
+  --text:         #e8f4ff;
+  --text-muted:   rgba(255, 255, 255, 0.35);
+  --glow-blue:    0 0 30px rgba(79, 158, 255, 0.6), 0 0 60px rgba(79, 158, 255, 0.2);
+}
+
+html {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+button { font-family: inherit; }
+
+::selection {
+  background: rgba(79, 158, 255, 0.35);
+  color: #fff;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(79, 158, 255, 0.2);
+  border-radius: 4px;
+}

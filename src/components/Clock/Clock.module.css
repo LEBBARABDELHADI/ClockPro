@@ -1,0 +1,239 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 64px 56px 56px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 32px;
+  box-shadow:
+    0 0 0 1px rgba(79, 158, 255, 0.06),
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 32px 80px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  width: 100%;
+  max-width: 920px;
+  overflow: hidden;
+  transition: box-shadow 0.3s ease;
+}
+
+/* gradient accent line — top */
+.wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 5%, #4f9eff 35%, #7c6aff 65%, transparent 95%);
+  border-radius: 32px 32px 0 0;
+}
+
+/* ── Mode toggle (pill) ───────────────────────────────────── */
+.modeToggle {
+  display: flex;
+  gap: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  padding: 4px;
+}
+
+.modeBtn {
+  padding: 8px 26px;
+  border-radius: 50px;
+  border: none;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.3);
+  font-family: 'Orbitron', monospace;
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.18em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modeBtn:hover:not(.modeBtnActive) {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.modeBtnActive {
+  background: linear-gradient(135deg, #4f9eff, #7c6aff);
+  color: #fff !important;
+  box-shadow: 0 2px 16px rgba(79, 158, 255, 0.4);
+}
+
+/* ── Display ──────────────────────────────────────────────── */
+.display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.ampm {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.32em;
+  color: rgba(79, 158, 255, 0.7);
+  margin-bottom: -16px;
+}
+
+.timeRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* pill background per digit group */
+.digitPair {
+  display: flex;
+  gap: 2px;
+  background: rgba(79, 158, 255, 0.06);
+  border: 1px solid rgba(79, 158, 255, 0.14);
+  border-radius: 20px;
+  padding: 20px 22px 14px;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.digitPair:hover {
+  background: rgba(79, 158, 255, 0.09);
+  border-color: rgba(79, 158, 255, 0.25);
+}
+
+/* digits with glow */
+.digits {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(3.8rem, 11vw, 9.5rem);
+  font-weight: 900;
+  line-height: 1;
+  color: #daeeff;
+  letter-spacing: -3px;
+  min-width: 0.6em;
+  text-align: center;
+  text-shadow:
+    0 0 24px rgba(79, 158, 255, 0.65),
+    0 0 48px rgba(79, 158, 255, 0.25);
+}
+
+.segLabel {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: rgba(79, 158, 255, 0.45);
+}
+
+.colon {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2.5rem, 8vw, 7rem);
+  font-weight: 900;
+  color: rgba(79, 158, 255, 0.35);
+  line-height: 1;
+  margin-bottom: 28px;
+  animation: colonBlink 1s step-end infinite;
+  text-shadow: 0 0 20px rgba(79, 158, 255, 0.3);
+}
+
+@keyframes colonBlink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.1; }
+}
+
+.date {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(0.88rem, 2.2vw, 1.1rem);
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+.timezone {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.76rem;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.05em;
+}
+
+/* ── SVG seconds ring ─────────────────────────────────────── */
+.ringsvg {
+  position: absolute;
+  width: 680px;
+  height: 680px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  pointer-events: none;
+  overflow: visible;
+}
+
+.ringTrack {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.04);
+  stroke-width: 2;
+}
+
+.ringProgress {
+  fill: none;
+  stroke: url(#clockGrad);
+  stroke-width: 2;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.6s linear;
+}
+
+.ringDot {
+  fill: #4f9eff;
+  filter: drop-shadow(0 0 8px rgba(79, 158, 255, 1)) drop-shadow(0 0 16px rgba(79, 158, 255, 0.6));
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+
+/* Tablet portrait (641–900px) */
+@media (max-width: 900px) and (min-width: 641px) {
+  .wrapper    { padding: 48px 32px; }
+  .digitPair  { padding: 16px 18px 12px; }
+}
+
+/* Tablet small + large phone landscape (481–768px) */
+@media (max-width: 768px) {
+  .wrapper   { padding: 40px 20px 40px; border-radius: 24px; gap: 24px; }
+  .colon     { margin-bottom: 20px; }
+  .ringsvg   { display: none; }
+  .digitPair { padding: 14px 14px 10px; border-radius: 16px; }
+}
+
+/* Phone (≤ 480px) — force smaller digits so the row fits */
+@media (max-width: 480px) {
+  .wrapper   { padding: 28px 14px 28px; gap: 20px; }
+  .timeRow   { gap: 4px; }
+  .modeBtn   { padding: 7px 16px; }
+  .colon     { font-size: 1.6rem; margin-bottom: 14px; }
+  .digits    { font-size: 3rem; letter-spacing: -2px; }
+  .digitPair { padding: 12px 10px 9px; border-radius: 14px; }
+  .segLabel  { font-size: 0.52rem; letter-spacing: 0.2em; }
+  .date      { font-size: 0.82rem; }
+  .timezone  { font-size: 0.7rem; }
+  .ampm      { font-size: 0.78rem; }
+}
+
+/* Small phone (≤ 380px — iPhone SE, etc.) */
+@media (max-width: 380px) {
+  .wrapper   { padding: 24px 10px; gap: 18px; }
+  .timeRow   { gap: 3px; }
+  .digits    { font-size: 2.5rem; letter-spacing: -2px; }
+  .digitPair { padding: 10px 8px 8px; border-radius: 12px; }
+  .colon     { font-size: 1.3rem; margin-bottom: 10px; }
+  .modeToggle { zoom: 0.9; }
+}

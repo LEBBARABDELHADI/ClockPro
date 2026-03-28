@@ -1,0 +1,340 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  padding: 56px 48px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 32px;
+  box-shadow:
+    0 0 0 1px rgba(79, 158, 255, 0.06),
+    0 8px 40px rgba(0, 0, 0, 0.5),
+    0 32px 80px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  width: 100%;
+  max-width: 680px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 5%, #4f9eff 35%, #7c6aff 65%, transparent 95%);
+  border-radius: 32px 32px 0 0;
+}
+
+/* ── Ring ─────────────────────────────────────────────────── */
+.ringContainer {
+  position: relative;
+  width: 310px;
+  height: 310px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.running {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1);    filter: drop-shadow(0 0 20px rgba(79, 158, 255, 0.2)); }
+  50%       { transform: scale(1.02); filter: drop-shadow(0 0 40px rgba(79, 158, 255, 0.45)); }
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+}
+
+.ringTrack {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.06);
+  stroke-width: 8;
+}
+
+.ringProgress {
+  fill: none;
+  stroke: url(#swGrad);
+  stroke-width: 8;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.08s linear;
+  filter: drop-shadow(0 0 6px rgba(79, 158, 255, 0.6));
+}
+
+/* ── Time display ─────────────────────────────────────────── */
+.timeDisplay {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+.hours {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(79, 158, 255, 0.5);
+  margin-right: 2px;
+}
+
+.mmss {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1px;
+}
+
+.flipMM {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2.2rem, 6.5vw, 3.4rem);
+  font-weight: 900;
+  color: #daeeff;
+  letter-spacing: -1px;
+  min-width: 0.6em;
+  text-align: center;
+  text-shadow:
+    0 0 20px rgba(79, 158, 255, 0.7),
+    0 0 40px rgba(79, 158, 255, 0.3);
+}
+
+.flipSS {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(2.2rem, 6.5vw, 3.4rem);
+  font-weight: 900;
+  color: #c4ddff;
+  letter-spacing: -1px;
+  min-width: 0.6em;
+  text-align: center;
+  text-shadow:
+    0 0 20px rgba(79, 158, 255, 0.5),
+    0 0 40px rgba(79, 158, 255, 0.2);
+}
+
+.msSep {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.6rem, 4.5vw, 2.4rem);
+  font-weight: 900;
+  color: rgba(79, 158, 255, 0.4);
+  padding: 0 2px;
+  line-height: 1;
+}
+
+.centiseconds {
+  font-family: 'Orbitron', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: rgba(79, 158, 255, 0.5);
+  min-width: 2.5ch;
+  align-self: flex-end;
+  margin-bottom: 4px;
+}
+
+/* ── Status dot ───────────────────────────────────────────── */
+.statusDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  transition: background 0.3s ease;
+  margin-top: -12px;
+}
+
+.dotRunning {
+  background: #4f9eff;
+  animation: dotPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(79, 158, 255, 0.5); }
+  50%       { box-shadow: 0 0 0 8px rgba(79, 158, 255, 0); }
+}
+
+/* ── Controls ─────────────────────────────────────────────── */
+.controls {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn {
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.02em;
+}
+
+.btn:disabled {
+  opacity: 0.2;
+  cursor: default;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.btn:not(:disabled):hover  { transform: translateY(-2px); }
+.btn:not(:disabled):active { transform: translateY(0); }
+
+/* gradient CTA — start / resume */
+.btnStart {
+  background: linear-gradient(135deg, #4f9eff, #7c6aff);
+  color: #fff;
+  border: none;
+  box-shadow: 0 4px 20px rgba(79, 158, 255, 0.4);
+}
+.btnStart:not(:disabled):hover {
+  box-shadow: 0 6px 28px rgba(79, 158, 255, 0.6);
+  filter: brightness(1.08);
+}
+
+/* pause — ghost blue tint */
+.btnPause {
+  background: rgba(79, 158, 255, 0.08);
+  color: #4f9eff;
+  border: 1.5px solid rgba(79, 158, 255, 0.3);
+}
+.btnPause:not(:disabled):hover {
+  background: rgba(79, 158, 255, 0.14);
+  border-color: rgba(79, 158, 255, 0.5);
+  box-shadow: 0 0 16px rgba(79, 158, 255, 0.2);
+}
+
+/* ghost buttons */
+.btnLap {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.55);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+}
+.btnLap:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.05);
+}
+
+.btnReset {
+  background: rgba(255, 80, 80, 0.06);
+  color: rgba(255, 120, 120, 0.8);
+  border: 1.5px solid rgba(255, 80, 80, 0.18);
+}
+.btnReset:not(:disabled):hover {
+  background: rgba(255, 80, 80, 0.12);
+  border-color: rgba(255, 80, 80, 0.35);
+  box-shadow: 0 0 14px rgba(255, 80, 80, 0.15);
+}
+
+/* ── Lap table ────────────────────────────────────────────── */
+.lapTable {
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.02);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(79, 158, 255, 0.25) transparent;
+}
+
+.lapTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.lapTable thead tr {
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(8px);
+}
+
+.lapTable th {
+  padding: 10px 18px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(79, 158, 255, 0.5);
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+}
+
+.lapTable td {
+  padding: 11px 18px;
+  font-size: 0.86rem;
+  font-family: 'Orbitron', monospace;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.55);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* alternating row highlight */
+.lapRow:nth-child(even) { background: rgba(255, 255, 255, 0.02); }
+.lapRow:hover           { background: rgba(79, 158, 255, 0.06); }
+.lapRow                 { animation: lapIn 0.3s ease; }
+
+.best {
+  background: rgba(79, 158, 255, 0.07) !important;
+  animation: lapIn 0.3s ease;
+}
+.best td { color: #4f9eff !important; }
+
+.worst {
+  background: rgba(255, 80, 80, 0.05) !important;
+  animation: lapIn 0.3s ease;
+}
+.worst td { color: rgba(255, 130, 130, 0.85) !important; }
+
+@keyframes lapIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ───────────────────────────────────────────── */
+
+/* Tablet (641–900px) */
+@media (max-width: 900px) and (min-width: 641px) {
+  .wrapper { padding: 48px 32px; }
+}
+
+/* Large phone / small tablet portrait (≤ 640px) */
+@media (max-width: 640px) {
+  .wrapper       { padding: 40px 20px; border-radius: 24px; }
+  .ringContainer { width: 280px; height: 280px; }
+}
+
+/* Phone (≤ 480px) */
+@media (max-width: 480px) {
+  .wrapper       { padding: 32px 16px; gap: 20px; }
+  .ringContainer { width: 240px; height: 240px; }
+  .btn           { padding: 10px 18px; font-size: 0.84rem; }
+  .centiseconds  { font-size: 1rem; }
+  .controls      { gap: 8px; }
+}
+
+/* Small phone (≤ 380px) */
+@media (max-width: 380px) {
+  .wrapper       { padding: 24px 12px; gap: 16px; }
+  .ringContainer { width: 210px; height: 210px; }
+  .btn           { padding: 9px 14px; font-size: 0.8rem; }
+  .flipMM,
+  .flipSS        { font-size: 1.9rem; }
+  .msSep         { font-size: 1.4rem; }
+  .centiseconds  { font-size: 0.9rem; }
+  .lapTable td   { padding: 9px 12px; font-size: 0.76rem; }
+  .lapTable th   { padding: 8px 12px; }
+}
