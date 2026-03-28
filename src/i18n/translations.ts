@@ -75,4 +75,13 @@ export const translations = {
   },
 } as const;
 
-export type Translations = typeof translations['fr'];
+export type Translations = {
+  nav: { clock: string; stopwatch: string };
+  clock: { hours: string; minutes: string; seconds: string };
+  stopwatch: {
+    start: string; resume: string; pause: string;
+    lap: string; reset: string;
+    lapNum: string; lapTime: string; total: string;
+  };
+  footer: string;
+};
